@@ -3,17 +3,29 @@ function CallController($controller, $req, $uri) {
 	require_once('controllers/' . $controller . '_controller.php');
 
 	switch($controller) {
-		case 'registration':
-			$controller = new RegistrationController();
+		case 'register':
+			$controller = new RegisterController();
+
 			if ($req === 'GET'){
 				$action = 'create';
-			} elseif ($req === 'POST'){
-				die('aaa');
+			} elseif ($req === 'POST' && $_POST['submit']){
+				$action = 'store';
+			}
+			break;
+		case 'login':
+			$controller = new LoginController();
+
+			if ($req == 'GET'){
+				$action = 'create';
+			} elseif ($req === 'POST' && $_POST['submit']){
+				$action = 'store';
 			}
 			break;
 		case 'post':
 		    require_once('models/post.php');
+
 			$controller = new PostController();
+
 			if ($req === 'GET' && $uri === '/'){
 				$action = 'index';
 			} elseif ($req === 'GET' && $_GET['id']){
@@ -22,6 +34,7 @@ function CallController($controller, $req, $uri) {
 			break;
 		default:
 			$controller = new PagesController();
+
 			$action = 'error';
 			break;
 	}
@@ -47,7 +60,7 @@ function GetController(){
 	}
 
 	// Allowed controllers
-	$controllers = array('pages','post','registration');
+	$controllers = array('pages','post','register','login');
 
 	if (in_array($controller, $controllers)) {
 		$req = $_SERVER['REQUEST_METHOD'];

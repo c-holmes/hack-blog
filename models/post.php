@@ -22,9 +22,9 @@
 		public static function getUsername($id)
 		{
 			$dbh = Db::getInstance(true);
-			$sql = 'SELECT firstname, lastname
+			$sql = "SELECT firstname, lastname
 				FROM users 
-				WHERE id = :id';
+				WHERE id = :id";
 			$sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->execute(array(':id' => $id));
 

@@ -1,0 +1,4 @@
+- add user registration
+- add user authentication
+- add post creation
+- add php templating engine (twig maybe)
